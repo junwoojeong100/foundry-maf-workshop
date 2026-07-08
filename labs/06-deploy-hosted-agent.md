@@ -124,6 +124,8 @@ azd ai agent init \
   -m /절대경로/code/maf_basic/agent.manifest.yaml \
   --project-id "<B-1에서 얻은 프로젝트 리소스 ID>" \
   --model-deployment gpt-5.4
+# init 도중 Application Insights를 붙일지 묻는 프롬프트가 나옵니다(선택 사항).
+# 관측(로그·추적)이 필요 없으면 건너뛰어도 배포에는 지장이 없습니다.
 
 # 2. 프로비저닝 + 배포를 한 번에 (컨테이너 remote build → hosted agent 생성)
 #    → ~/maf-deploy/maf-basic-agent/ 안에서 실행
@@ -131,7 +133,7 @@ cd maf-basic-agent
 azd up
 ```
 
-> 💡 `azd up` 대신 `azd provision`(리소스) → `azd deploy`(코드)로 나눠 실행해도 됩니다. 기존 프로젝트를 재사용하므로 프로비저닝 단계에서는 **App Insights·컨테이너 레지스트리 연결** 정도만 추가되고, 프로젝트·모델은 기존 것을 그대로 씁니다.
+> 💡 `azd up` 대신 `azd provision`(리소스) → `azd deploy`(코드)로 나눠 실행해도 됩니다. 기존 프로젝트를 재사용하므로 프로비저닝 단계에서는 **컨테이너 레지스트리 연결**과 (선택 시) **Application Insights** 정도만 추가되고, 프로젝트·모델은 기존 것을 그대로 씁니다.
 >
 > `azd ai agent`는 **preview**입니다. 플래그가 바뀔 수 있으니 `azd ai agent init --help`로 최신 목록을 확인하세요.
 
@@ -139,7 +141,7 @@ azd up
 
 - `FOUNDRY_PROJECT_ENDPOINT`
 - `AZURE_AI_MODEL_DEPLOYMENT_NAME`
-- `APPLICATIONINSIGHTS_CONNECTION_STRING`
+- `APPLICATIONINSIGHTS_CONNECTION_STRING` *(Application Insights를 붙였을 때만)*
 
 **확인**: CLI로 `azd ai agent show maf-basic-agent`의 `Status`가 **active**이면 성공입니다. [포털](https://ai.azure.com) → 프로젝트 → **Agents** 목록에도 `maf-basic-agent`가 보입니다. 성공 시 `azd up` 출력 끝에 **Agent endpoint(responses)** URL이 표시됩니다.
 
