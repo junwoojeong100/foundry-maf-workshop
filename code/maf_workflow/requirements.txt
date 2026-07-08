@@ -1,0 +1,3 @@
+# hosted agent 컨테이너에 설치되는 최소 의존성
+agent-framework-foundry
+agent-framework-foundry-hosting>=1.0.0a260630
