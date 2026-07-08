@@ -27,7 +27,7 @@
 이번 예제의 흐름:
 
 ```
-입력: "친환경 텀블러 슬로건 만들어줘"
+입력: "친환경 텀블러 브랜드의 슬로건을 만들어줘"
    │
    ▼  [writer]          슬로건 초안 작성
    │
@@ -45,6 +45,8 @@
 📄 `code/maf_workflow/main.py` (핵심 부분)
 
 ```python
+import os
+from azure.identity import DefaultAzureCredential
 from agent_framework import Agent, AgentExecutor, WorkflowBuilder
 from agent_framework.foundry import FoundryChatClient
 

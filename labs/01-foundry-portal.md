@@ -103,9 +103,9 @@ az role assignment create --assignee "$OID" --scope "$ACCT_ID" \
 
 ---
 
-## 4. `.env` 채우기
+## `.env` 채우기
 
-복사한 값으로 저장소 루트의 `.env` 파일을 채웁니다.
+복사한 값으로 저장소 루트의 `.env` 파일을 채웁니다. (방법 A·B 어느 쪽으로 진행했든 공통 단계입니다.)
 
 ```bash
 FOUNDRY_PROJECT_ENDPOINT=https://my-foundry-resource.services.ai.azure.com/api/projects/my-foundry-project
