@@ -9,3 +9,6 @@ __pycache__/
 
 # azd 배포 산출물
 .azure/
+
+# MAF 워크플로우 런타임 체크포인트
+.checkpoints/
