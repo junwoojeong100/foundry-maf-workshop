@@ -1,5 +1,12 @@
 # Microsoft Foundry & Microsoft Agent Framework 핸즈온 워크샵
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
+[![Microsoft Foundry](https://img.shields.io/badge/Microsoft-Foundry-0078D4.svg)](https://ai.azure.com)
+[![Agent Framework](https://img.shields.io/badge/Microsoft-Agent%20Framework-5C2D91.svg)](https://learn.microsoft.com/agent-framework/)
+[![Model: gpt-5.4](https://img.shields.io/badge/Model-gpt--5.4-10A37F.svg)](https://ai.azure.com)
+![Language: 한국어](https://img.shields.io/badge/Language-한국어-black.svg)
+
 > AI 에이전트를 **만들고(Foundry)**, **코드로 빌드(Agent Framework)** 하는 기본기를 약 2.5시간 안에 익히는 실습 워크샵입니다.
 
 이 워크샵은 처음 Microsoft의 에이전트 스택을 접하는 개발자를 대상으로 합니다. 아주 기본적이지만 **꼭 알아야 하는 것들**만 골라, 직접 손으로 따라 하며 개념을 몸에 익히도록 구성했습니다.
@@ -90,6 +97,7 @@ cp ../.env.example ../.env
 ```
 .
 ├── README.md                          # 지금 보고 있는 문서
+├── LICENSE                            # MIT 라이선스
 ├── .env.example                       # 환경변수 템플릿
 ├── labs/                              # 실습 가이드 (한국어)
 │   ├── 00-setup.md
