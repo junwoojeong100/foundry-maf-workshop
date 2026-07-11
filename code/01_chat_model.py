@@ -19,25 +19,31 @@ from dotenv import load_dotenv
 from azure.identity import DefaultAzureCredential
 from azure.ai.projects import AIProjectClient
 
-load_dotenv()
 
-PROJECT_ENDPOINT = os.environ["FOUNDRY_PROJECT_ENDPOINT"]
-MODEL = os.environ.get("AZURE_AI_MODEL_DEPLOYMENT_NAME", "gpt-5.4")
+def main() -> None:
+    load_dotenv()
 
-# 프로젝트 클라이언트 생성 (az login 자격증명을 자동으로 사용)
-project = AIProjectClient(
-    endpoint=PROJECT_ENDPOINT,
-    credential=DefaultAzureCredential(),
-)
+    project_endpoint = os.environ["FOUNDRY_PROJECT_ENDPOINT"]
+    model = os.environ.get("AZURE_AI_MODEL_DEPLOYMENT_NAME", "gpt-5.4")
 
-# 프로젝트에서 OpenAI 호환 클라이언트를 가져옵니다.
-openai = project.get_openai_client()
+    # 프로젝트 클라이언트 생성 (az login 자격증명을 자동으로 사용)
+    project = AIProjectClient(
+        endpoint=project_endpoint,
+        credential=DefaultAzureCredential(),
+    )
 
-# Responses API로 모델을 한 번 호출합니다.
-response = openai.responses.create(
-    model=MODEL,
-    input="프랑스의 면적은 몇 제곱 킬로미터인가요? 한 문장으로 답해주세요.",
-)
+    # 프로젝트에서 OpenAI 호환 클라이언트를 가져옵니다.
+    openai = project.get_openai_client()
 
-print("모델 응답:")
-print(response.output_text)
+    # Responses API로 모델을 한 번 호출합니다.
+    response = openai.responses.create(
+        model=model,
+        input="프랑스의 면적은 몇 제곱 킬로미터인가요? 한 문장으로 답해주세요.",
+    )
+
+    print("모델 응답:")
+    print(response.output_text)
+
+
+if __name__ == "__main__":
+    main()

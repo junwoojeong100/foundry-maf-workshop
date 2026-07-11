@@ -65,7 +65,7 @@
 - [ ] **Python 3.13 이상** — `python3 --version`으로 확인
 - [ ] **Azure CLI** — `az --version`으로 확인 ([설치 가이드](https://learn.microsoft.com/cli/azure/install-azure-cli))
 - [ ] **Bash 호환 터미널** — macOS/Linux, Windows는 WSL 또는 Git Bash 권장
-- [ ] **Docker Desktop 또는 Docker Engine** *(선택)* — Lab 06의 container deployment 실습에만 필요
+- [ ] **Docker Desktop 또는 Docker Engine** *(선택)* — Lab 06에서 컨테이너 이미지를 로컬 빌드·검증할 때만 필요
 - [ ] **코드 에디터** — Visual Studio Code 권장 (+ Python 확장)
 - [ ] **Git** *(선택)* — 이 저장소를 클론하려면 필요
 

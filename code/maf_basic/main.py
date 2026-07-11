@@ -60,6 +60,10 @@ def run_serve() -> None:
 
     이 진입점이 곧 Foundry hosted agent가 실행하는 코드입니다.
     """
+    # 로컬에서 Azure VM 메타데이터를 조회하는 Statsbeat만 비활성화합니다.
+    if not os.environ.get("FOUNDRY_HOSTING_ENVIRONMENT"):
+        os.environ.setdefault("APPLICATIONINSIGHTS_STATSBEAT_DISABLED_ALL", "true")
+
     from agent_framework_foundry_hosting import ResponsesHostServer
 
     server = ResponsesHostServer(build_agent())

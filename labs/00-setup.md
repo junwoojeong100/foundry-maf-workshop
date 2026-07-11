@@ -73,7 +73,7 @@ az --version
 
 ### 2-5. Docker (Lab 06 선택 실습)
 
-기본 code deployment에는 필요하지 않습니다. Lab 06에서 container deployment까지 실습하려면 Docker Desktop 또는 Docker Engine을 설치하고 Client와 Server가 모두 표시되는지 확인합니다.
+기본 code deployment에는 필요하지 않습니다. Lab 06의 container deployment도 기본 ACR 원격 빌드만 수행하면 로컬 Docker 없이 배포할 수 있습니다. 선택 단계에서 이미지를 직접 빌드하고 `/readiness`를 확인하려면 Docker Desktop 또는 Docker Engine을 설치하고 Client와 Server가 모두 표시되는지 확인합니다.
 
 ```bash
 docker version
