@@ -1,7 +1,7 @@
 # Microsoft Foundry & Microsoft Agent Framework 핸즈온 워크샵
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
+[![Python 3.13+](https://img.shields.io/badge/Python-3.13%2B-blue.svg)](https://www.python.org/)
 [![Microsoft Foundry](https://img.shields.io/badge/Microsoft-Foundry-0078D4.svg)](https://ai.azure.com)
 [![Agent Framework](https://img.shields.io/badge/Microsoft-Agent%20Framework-5C2D91.svg)](https://learn.microsoft.com/agent-framework/)
 [![Model: gpt-5.4](https://img.shields.io/badge/Model-gpt--5.4-10A37F.svg)](https://ai.azure.com)
@@ -32,7 +32,7 @@
 | 구분 | Microsoft Foundry | Microsoft Agent Framework |
 |------|-------------------|---------------------------|
 | **한 줄 정의** | AI 앱·에이전트를 **만들고 배포·운영·거버넌스**하는 클라우드 플랫폼 | 코드로 **에이전트와 워크플로우를 빌드**하는 오픈소스 SDK |
-| **형태** | Azure 클라우드 서비스 + 포털([ai.azure.com](https://ai.azure.com)) | Python / .NET 라이브러리 (`pip install agent-framework`) |
+| **형태** | Azure 클라우드 서비스 + 포털([ai.azure.com](https://ai.azure.com)) | Python / .NET 라이브러리 (`pip install agent-framework-core`) |
 | **주로 하는 일** | 모델 배포, 에이전트 호스팅, 관측(observability), 평가, 보안·거버넌스 | 에이전트 정의, 도구 호출, 멀티턴 대화, 멀티 에이전트 오케스트레이션 |
 | **비유** | 에이전트가 **살아가는 도시(인프라)** | 에이전트를 **조립하는 공구 세트(코드)** |
 
@@ -50,7 +50,7 @@
 | [03. 첫 에이전트](labs/03-agent-framework-first.md) | MAF 에이전트 만들기 + 로컬/서버 실행 | 20분 |
 | [04. 도구 추가](labs/04-agent-framework-tools.md) | 함수 도구 붙이기 + 로컬/서버 실행 | 20분 |
 | [05. 워크플로우](labs/05-agent-framework-workflow.md) | 에이전트를 워크플로우로 연결 → 단일 에이전트화 | 20분 |
-| [06. Foundry에 배포](labs/06-deploy-hosted-agent.md) | 에이전트·워크플로우를 hosted agent로 배포·호출 | 30분 |
+| [06. Foundry에 배포](labs/06-deploy-hosted-agent.md) | 에이전트·워크플로우를 code deployment로 배포·호출 | 30분 |
 | — | Q&A / 마무리 | 5분 |
 | [부록. Copilot CLI](labs/appendix-copilot-cli.md) | GitHub Copilot CLI 실습 *(Optional)* | 15분 |
 
@@ -60,9 +60,11 @@
 
 워크샵 시작 전 아래 항목을 미리 준비해 주세요. 자세한 설치 방법은 [00. 환경 준비](labs/00-setup.md)에 있습니다.
 
-- [ ] **Azure 구독** — 유효한 결제가 연결된 구독, Foundry 리소스를 만들 권한(Owner 또는 Contributor)
-- [ ] **Python 3.10 이상** — `python --version`으로 확인
+- [ ] **Azure 구독** — 유효한 결제가 연결된 구독
+- [ ] **권한** — 리소스 생성은 Contributor 이상, 역할 할당까지 직접 하려면 Owner 또는 Role Based Access Control Administrator
+- [ ] **Python 3.13 이상** — `python3 --version`으로 확인
 - [ ] **Azure CLI** — `az --version`으로 확인 ([설치 가이드](https://learn.microsoft.com/cli/azure/install-azure-cli))
+- [ ] **Bash 호환 터미널** — macOS/Linux, Windows는 WSL 또는 Git Bash 권장
 - [ ] **코드 에디터** — Visual Studio Code 권장 (+ Python 확장)
 - [ ] **Git** *(선택)* — 이 저장소를 클론하려면 필요
 
@@ -75,11 +77,12 @@
 cd code
 
 # 2. 가상환경 생성 & 활성화 (권장)
-python -m venv .venv
-source .venv/bin/activate        # Windows: .venv\Scripts\activate
+python3 -m venv .venv
+source .venv/bin/activate        # macOS/Linux/WSL/Git Bash
+# Windows PowerShell: .\.venv\Scripts\Activate.ps1
 
 # 3. 의존성 설치
-pip install -r requirements.txt
+python -m pip install -r requirements.txt
 
 # 4. Azure 로그인
 az login
@@ -113,14 +116,13 @@ cp ../.env.example ../.env
     ├── 01_chat_model.py               # Lab 02: Foundry SDK 기초 (유일한 SDK 예제)
     ├── maf_basic/                     # Lab 03: MAF 기본 에이전트
     │   ├── main.py                    #   local | serve | call 모드
-    │   ├── agent.yaml                 #   hosted agent 컨테이너 설정
-    │   ├── agent.manifest.yaml        #   배포 매니페스트
-    │   ├── Dockerfile
-    │   ├── requirements.txt
+    │   ├── requirements.txt           #   로컬/hosted code deployment 의존성
     │   └── .env.example
     ├── maf_tools/                     # Lab 04: 함수 도구 에이전트 (동일 구조)
     └── maf_workflow/                  # Lab 05: 워크플로우 → 단일 에이전트 (동일 구조)
 ```
+
+> Lab 06에서 `azd ai agent init`이 현재 형식의 통합 `azure.yaml`과 `.agentignore`를 생성합니다. 폐기 예정인 `agent.manifest.yaml`/`agent.yaml`은 저장소에 두지 않습니다.
 
 ---
 

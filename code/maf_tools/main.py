@@ -2,11 +2,12 @@
 MAF 도구(함수) 에이전트 — 로컬 실행 & Foundry hosted agent 배포
 
 에이전트에 @tool 함수를 붙여, 모델이 필요할 때 스스로 호출하게 합니다.
+이 예제의 날씨 값은 외부 API가 아닌 무작위 모의 데이터입니다.
 함수 도구는 호스팅되더라도 **에이전트의 프로세스 안에서** 실행됩니다.
 
 모드:
   python main.py local    # 콘솔에서 직접 호출
-  python main.py serve     # Responses 서버 (http://localhost:8088) ← 컨테이너 기본 진입점
+  python main.py serve     # Responses 서버 (http://localhost:8088) ← hosted runtime 진입점
   python main.py call      # 배포된 hosted agent 원격 호출
 
 환경변수:
@@ -33,12 +34,13 @@ AGENT_NAME = os.environ.get("FOUNDRY_AGENT_NAME", "maf-tools-agent")
 
 # ---------- 도구 정의 ----------
 # docstring과 Field 설명이 모델에게 전달되어, 언제 이 도구를 쓸지 판단하는 근거가 됩니다.
-# approval_mode="never_require" 는 실습 편의용. 운영에서는 "always_require" 권장.
+# approval_mode="never_require"는 부작용 없는 모의 조회를 간단히 실습하기 위한 설정입니다.
+# 운영에서는 도구의 위험도에 따라 승인 정책을 정하세요.
 @tool(approval_mode="never_require")
 def get_weather(
     location: Annotated[str, Field(description="날씨를 조회할 지역 이름")],
 ) -> str:
-    """주어진 지역의 현재 날씨를 반환합니다."""
+    """주어진 지역의 실습용 모의 날씨를 반환합니다."""
     conditions = ["맑음", "흐림", "비", "폭풍"]
     return f"{location}의 날씨는 {conditions[randint(0, 3)]}, 최고 기온 {randint(10, 30)}°C입니다."
 

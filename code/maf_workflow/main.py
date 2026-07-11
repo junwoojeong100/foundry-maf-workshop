@@ -9,7 +9,7 @@ Foundry hosted agent로 배포합니다. (Foundry Agent Service는 단일 에이
 
 모드:
   python main.py local    # 콘솔에서 워크플로우 직접 실행
-  python main.py serve     # Responses 서버 (http://localhost:8088) ← 컨테이너 기본 진입점
+  python main.py serve     # Responses 서버 (http://localhost:8088) ← hosted runtime 진입점
   python main.py call      # 배포된 hosted agent(워크플로우) 원격 호출
 
 환경변수:

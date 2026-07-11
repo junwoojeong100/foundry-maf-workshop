@@ -33,7 +33,7 @@ from agent_framework import Agent
 from agent_framework.foundry import FoundryChatClient
 ```
 
-- 설치: `pip install -r requirements.txt` (루트의 `code/requirements.txt`)
+- 설치: `python -m pip install -r requirements.txt` (루트의 `code/requirements.txt`)
 - `agent-framework`는 빠르게 진화합니다. import 오류가 나면 [공식 문서](https://learn.microsoft.com/agent-framework/agents/providers/microsoft-foundry)에서 최신 경로를 확인하세요.
 
 ---
@@ -101,7 +101,7 @@ python main.py serve
 ```bash
 curl -X POST http://localhost:8088/responses \
   -H "Content-Type: application/json" \
-  -d '{"input": "프랑스의 수도는 어디인가요?"}'
+  -d '{"input": "프랑스의 수도는 어디인가요?", "stream": false}'
 ```
 
 **확인**: HTTP 응답 본문에 에이전트의 답이 들어 있으면, **로컬에서 hosted agent와 동일한 방식으로** 에이전트를 노출한 것입니다. 이 상태를 그대로 Foundry에 올리는 것이 [Lab 06](06-deploy-hosted-agent.md)입니다.
@@ -124,8 +124,8 @@ curl -X POST http://localhost:8088/responses \
 
 | 증상 | 해결 |
 |------|------|
-| `ModuleNotFoundError: agent_framework.foundry` | `pip install agent-framework-foundry` |
-| `ModuleNotFoundError: agent_framework_foundry_hosting` | `pip install agent-framework-foundry-hosting` (serve 모드에 필요) |
+| `ModuleNotFoundError: agent_framework.foundry` | `python -m pip install -r requirements.txt` 재실행 |
+| `ModuleNotFoundError: agent_framework_foundry_hosting` | `python -m pip install -r requirements.txt` 재실행 |
 | 인증 오류 | `az login` 재실행 |
 | `.env` 값 없음 | MAF는 `.env`를 자동 로드하지 않습니다. 코드 상단 `load_dotenv()` 필수 |
 | 포트 8088 사용 중 | 기존 serve 프로세스를 종료하거나 다른 포트로 실행 |

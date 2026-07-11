@@ -98,7 +98,7 @@ python main.py local
 python main.py serve
 curl -X POST http://localhost:8088/responses \
   -H "Content-Type: application/json" \
-  -d '{"input": "친환경 텀블러 브랜드의 슬로건을 만들어줘"}'
+  -d '{"input": "친환경 텀블러 브랜드의 슬로건을 만들어줘", "stream": false}'
 ```
 
 **확인**: writer → reviewer → formatter 세 단계를 거친 최종 슬로건이 나오면 성공입니다. 외부에서는 이 파이프라인이 **하나의 에이전트**처럼 보입니다.
@@ -119,6 +119,8 @@ curl -X POST http://localhost:8088/responses \
 ## ⚠️ import 경로 안내
 
 `agent-framework`의 워크플로우 API는 버전에 따라 경로가 다를 수 있습니다. 오류가 나면 [공식 샘플](https://github.com/microsoft/agent-framework/tree/main/python/samples/04-hosting/foundry-hosted-agents/responses/05_workflows)에서 최신 형태를 확인하세요.
+
+> 이 워크플로우는 이전 에이전트의 assistant 메시지를 다음 에이전트가 이어서 처리하므로, 공식 샘플과 동일하게 `gpt-5.4`로 검증했습니다.
 
 ---
 

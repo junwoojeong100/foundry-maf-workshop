@@ -1,3 +1,6 @@
-# hosted agent 컨테이너에 설치되는 최소 의존성
-agent-framework-foundry
-agent-framework-foundry-hosting>=1.0.0a260630
+# 2026-07-11 검증 버전 (Foundry code deployment용)
+agent-framework-core==1.11.0
+agent-framework-foundry==1.10.1
+agent-framework-foundry-hosting==1.0.0a260709
+azure-identity==1.25.3
+python-dotenv==1.2.2

@@ -2,26 +2,29 @@
 #
 # 설치: pip install -r requirements.txt
 #
-# (각 hosted agent 폴더(maf_basic/ 등)에는 컨테이너용 최소 requirements.txt 가 따로 있습니다.)
+# (각 hosted agent 폴더(maf_basic/ 등)에는 code deployment용 requirements.txt가 따로 있습니다.)
+
+# 2026-07-11에 Python 3.13으로 검증한 버전입니다.
+# 워크샵 중 API 변경으로 예제가 깨지지 않도록 정확한 버전을 사용합니다.
 
 # --- Foundry SDK (Lab 02: 기초 예제 1개) ---
-# Foundry projects (신규) API. 반드시 2.0.0 이상이어야 합니다.
-azure-ai-projects>=2.0.0
+azure-ai-projects==2.3.0
 
 # --- Microsoft Agent Framework 코어 (Lab 03~06) ---
-agent-framework
+# agent-framework 메타 패키지는 불필요한 선택 기능까지 설치하므로 사용하지 않습니다.
+agent-framework-core==1.11.0
 
 # --- Foundry 전용 클라이언트: FoundryChatClient / FoundryAgent ---
-agent-framework-foundry
+agent-framework-foundry==1.10.1
 
 # --- hosted agent를 로컬에서 serve 하기 위한 호스팅 런타임 (Lab 06) ---
-agent-framework-foundry-hosting>=1.0.0a260630
+agent-framework-foundry-hosting==1.0.0a260709
 
 # --- 인증 (공통) ---
-azure-identity
+azure-identity==1.25.3
 
 # --- 편의: .env 파일 로딩 ---
-python-dotenv
+python-dotenv==1.2.2
 
 # --- Lab 04 도구 예제의 파라미터 스키마 ---
-pydantic
+pydantic==2.13.4

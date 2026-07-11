@@ -4,10 +4,10 @@ MAF 기본 에이전트 — 로컬 실행 & Foundry hosted agent 배포
 하나의 파일로 세 가지 모드를 지원합니다.
 
   python main.py local    # 내 프로세스에서 에이전트를 직접 호출 (콘솔 테스트)
-  python main.py serve     # Responses 서버로 띄움 (http://localhost:8088) ← 컨테이너 기본 진입점
+  python main.py serve     # Responses 서버로 띄움 (http://localhost:8088) ← hosted runtime 진입점
   python main.py call      # Foundry에 "배포된" hosted agent를 원격 호출
 
-인자 없이 `python main.py` 로 실행하면 serve 모드입니다. (Dockerfile 기본 CMD)
+인자 없이 `python main.py`로 실행하면 serve 모드입니다. (Lab 06 code deployment 진입점)
 
 환경변수 (.env 또는 호스팅 인프라가 주입):
   FOUNDRY_PROJECT_ENDPOINT       Foundry 프로젝트 엔드포인트
@@ -28,7 +28,7 @@ from agent_framework.foundry import FoundryChatClient
 load_dotenv()
 
 INSTRUCTIONS = "당신은 친절한 도우미입니다. 답변은 짧게 하세요."
-# hosted agent로 배포될 때 붙는 이름 (agent.manifest.yaml 의 name 과 맞추세요)
+# hosted agent로 배포할 때의 `--agent-name` 값과 맞추세요.
 AGENT_NAME = os.environ.get("FOUNDRY_AGENT_NAME", "maf-basic-agent")
 
 

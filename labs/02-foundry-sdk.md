@@ -7,7 +7,7 @@
 **Microsoft Agent Framework(MAF)** 로 에이전트·워크플로우를 만들고, 로컬 실행과
 Foundry hosted agent 배포까지 진행합니다.
 
-사용 SDK: `azure-ai-projects>=2.0.0`
+검증 SDK: `azure-ai-projects==2.3.0`
 
 ---
 
@@ -90,9 +90,9 @@ python 01_chat_model.py
 |------|------|
 | `DefaultAzureCredential` 인증 실패 | `az login`을 다시 실행하고, `az account show`로 로그인 확인 |
 | `FOUNDRY_PROJECT_ENDPOINT` KeyError | `.env`가 저장소 루트에 있고 값이 채워졌는지 확인. `load_dotenv()` 호출 확인 |
-| 403 / 권한 오류 | 리소스에 데이터플레인 역할이 필요합니다: **Cognitive Services OpenAI User**(모델 추론) + **Cognitive Services User**. 부여 후 전파에 1~2분 소요 |
+| 403 / 권한 오류 | Foundry 리소스에 **Foundry User** 역할이 있는지 확인합니다. 역할 부여 후 전파에 수 분 걸릴 수 있습니다. |
 | 모델 not found | `.env`의 `AZURE_AI_MODEL_DEPLOYMENT_NAME`이 실제 **배포 이름**과 일치하는지 확인 |
-| `azure-ai-projects` 관련 오류 | 버전이 2.0.0 이상인지 확인: `pip show azure-ai-projects` |
+| `azure-ai-projects` 관련 오류 | 검증 버전인지 확인: `python -m pip show azure-ai-projects` (`2.3.0`) |
 
 ---
 
