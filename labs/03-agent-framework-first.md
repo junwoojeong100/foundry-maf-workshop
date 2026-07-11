@@ -69,6 +69,11 @@ async def run_local():
     print("에이전트:", await agent.run("프랑스의 수도는 어디인가요?"))
 
 def run_serve():
+    # 로컬에서는 Azure Monitor Statsbeat의 VM 메타데이터 조회를 생략합니다.
+    # Foundry hosted 환경에서는 이 변수를 설정하지 않아 플랫폼 관측을 유지합니다.
+    if not os.environ.get("FOUNDRY_HOSTING_ENVIRONMENT"):
+        os.environ.setdefault("APPLICATIONINSIGHTS_STATSBEAT_DISABLED_ALL", "true")
+
     from agent_framework_foundry_hosting import ResponsesHostServer
     ResponsesHostServer(build_agent()).run()   # http://localhost:8088
 ```
@@ -128,6 +133,7 @@ curl -X POST http://localhost:8088/responses \
 | `ModuleNotFoundError: agent_framework_foundry_hosting` | `python -m pip install -r requirements.txt` 재실행 |
 | 인증 오류 | `az login` 재실행 |
 | `.env` 값 없음 | MAF는 `.env`를 자동 로드하지 않습니다. 코드 상단 `load_dotenv()` 필수 |
+| 로컬 로그에 `169.254.169.254` 연결 오류가 반복됨 | 전체 예제의 `run_serve()`처럼 로컬에서 `APPLICATIONINSIGHTS_STATSBEAT_DISABLED_ALL=true`를 설정했는지 확인 |
 | 포트 8088 사용 중 | 기존 serve 프로세스를 종료하거나 다른 포트로 실행 |
 
 ---
