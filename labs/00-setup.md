@@ -71,6 +71,14 @@ az --version
 - Windows: **WSL** 또는 **Git Bash** 권장
 - PowerShell만 쓴다면 줄 연속 문자(`\`)와 `cp`, `mkdir -p` 명령을 PowerShell 문법으로 바꿔야 합니다.
 
+### 2-5. Docker (Lab 06 선택 실습)
+
+기본 code deployment에는 필요하지 않습니다. Lab 06에서 container deployment까지 실습하려면 Docker Desktop 또는 Docker Engine을 설치하고 Client와 Server가 모두 표시되는지 확인합니다.
+
+```bash
+docker version
+```
+
 ---
 
 ## 3. 프로젝트 코드 준비

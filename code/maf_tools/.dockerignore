@@ -1,0 +1,9 @@
+.env
+.venv/
+.azure/
+.foundry/
+.git/
+__pycache__/
+*.py[cod]
+.checkpoints/
+.DS_Store

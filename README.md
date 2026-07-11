@@ -50,7 +50,7 @@
 | [03. 첫 에이전트](labs/03-agent-framework-first.md) | MAF 에이전트 만들기 + 로컬/서버 실행 | 20분 |
 | [04. 도구 추가](labs/04-agent-framework-tools.md) | 함수 도구 붙이기 + 로컬/서버 실행 | 20분 |
 | [05. 워크플로우](labs/05-agent-framework-workflow.md) | 에이전트를 워크플로우로 연결 → 단일 에이전트화 | 20분 |
-| [06. Foundry에 배포](labs/06-deploy-hosted-agent.md) | 에이전트·워크플로우를 code deployment로 배포·호출 | 30분 |
+| [06. Foundry에 배포](labs/06-deploy-hosted-agent.md) | hosted agent를 code deployment로 배포하고 container deployment 비교 | 30분 (+선택 20분) |
 | — | Q&A / 마무리 | 5분 |
 | [부록. Copilot CLI](labs/appendix-copilot-cli.md) | GitHub Copilot CLI 실습 *(Optional)* | 15분 |
 
@@ -65,6 +65,7 @@
 - [ ] **Python 3.13 이상** — `python3 --version`으로 확인
 - [ ] **Azure CLI** — `az --version`으로 확인 ([설치 가이드](https://learn.microsoft.com/cli/azure/install-azure-cli))
 - [ ] **Bash 호환 터미널** — macOS/Linux, Windows는 WSL 또는 Git Bash 권장
+- [ ] **Docker Desktop 또는 Docker Engine** *(선택)* — Lab 06의 container deployment 실습에만 필요
 - [ ] **코드 에디터** — Visual Studio Code 권장 (+ Python 확장)
 - [ ] **Git** *(선택)* — 이 저장소를 클론하려면 필요
 
@@ -116,13 +117,15 @@ cp ../.env.example ../.env
     ├── 01_chat_model.py               # Lab 02: Foundry SDK 기초 (유일한 SDK 예제)
     ├── maf_basic/                     # Lab 03: MAF 기본 에이전트
     │   ├── main.py                    #   local | serve | call 모드
-    │   ├── requirements.txt           #   로컬/hosted code deployment 의존성
+    │   ├── requirements.txt           #   로컬/hosted agent 의존성
+    │   ├── Dockerfile                 #   선택: container deployment 이미지
+    │   ├── .dockerignore              #   선택: 컨테이너 빌드 제외 목록
     │   └── .env.example
     ├── maf_tools/                     # Lab 04: 함수 도구 에이전트 (동일 구조)
     └── maf_workflow/                  # Lab 05: 워크플로우 → 단일 에이전트 (동일 구조)
 ```
 
-> Lab 06에서 `azd ai agent init`이 현재 형식의 통합 `azure.yaml`과 `.agentignore`를 생성합니다. 폐기 예정인 `agent.manifest.yaml`/`agent.yaml`은 저장소에 두지 않습니다.
+> Lab 06에서 `azd ai agent init`이 현재 형식의 통합 `azure.yaml`을 생성합니다. 기본 실습은 ZIP 기반 code deployment이며, Docker/ACR을 배우려면 같은 소스를 container deployment로도 배포할 수 있습니다. 두 방식 모두 폐기 예정인 `agent.manifest.yaml`/`agent.yaml`은 사용하지 않습니다.
 
 ---
 
